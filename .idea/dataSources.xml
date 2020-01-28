@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="org:example:hibernate.cfg.xml/Hibernate" uuid="5f9668b7-4030-4e7b-a8cb-487936e006d6">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/michal/IdeaProjects/javafx-maven-setup/javafx-maven-setup/kontrolaHaselDostepowych/src/main/resources/org/example/hibernate.cfg.xml</remarks>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost:1433;Database=NEO1012_Kontrola</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="org:example:Model:Config:hibernate.cfg.xml/Hibernate" uuid="446c97f8-f562-451a-8241-efef3927ebb4">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/michal/IdeaProjects/javafx-maven-setup/javafx-maven-setup/kontrolaHaselDostepowych/src/main/java/org/example/Model/Config/hibernate.cfg.xml</remarks>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost:1433;Database=NEO1012_Kontrola</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="config:hibernate.cfg.xml/Hibernate" uuid="c2c955da-fab7-43c1-82f3-3e130ecd5eb1">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/michal/IdeaProjects/javafx-maven-setup/javafx-maven-setup/kontrolaHaselDostepowych/src/main/resources/config/hibernate.cfg.xml</remarks>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost:1433;Database=NEO1012_Kontrola</jdbc-url>
+    </data-source>
+  </component>
+</project>

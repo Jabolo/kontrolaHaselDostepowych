@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="config:hibernate.cfg.xml" value="c2c955da-fab7-43c1-82f3-3e130ecd5eb1" />
+          <unit-entry name="org:example:Model:Config:hibernate.cfg.xml" value="446c97f8-f562-451a-8241-efef3927ebb4" />
+          <unit-entry name="org:example:hibernate.cfg.xml" value="5f9668b7-4030-4e7b-a8cb-487936e006d6" />
+        </datasource-map>
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/config/hibernate.cfg.xml" />
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <datasource-mapping>
+          <factory-entry name="Entities" value="5f9668b7-4030-4e7b-a8cb-487936e006d6" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+  </component>
+</module>

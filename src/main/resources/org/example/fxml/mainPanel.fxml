@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.mainPanelController">
+   <top>
+      <HBox prefHeight="59.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnUsers" mnemonicParsing="false" onAction="#selectedUsers" prefHeight="36.0" prefWidth="185.0" text="Użytkownicy" />
+            <Button fx:id="btnAccessData" mnemonicParsing="false" onAction="#selectedAccessData" prefHeight="36.0" prefWidth="185.0" text="Dane Dostępowe" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
