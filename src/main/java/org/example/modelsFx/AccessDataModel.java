@@ -15,14 +15,26 @@ public class AccessDataModel {
     private ObjectProperty<AccessDataFX> accessDataFXProperty = new SimpleObjectProperty<>(new AccessDataFX());
     private ObservableList<AccessDataFX> accessDataFXObservableList = FXCollections.observableArrayList();
 
-
     public void saveAccessDataInDB() {
         try {
+            AccessData accessData = TransformAccessData.transformToAccessData(this.getAccessDataFXProperty());
             AccessDataDao accessDataDao = new AccessDataDao();
-            //accessDataDao.addAccessData(accessData);
+            accessDataDao.createAccess(accessData);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        init();
+    }
+
+    public void updateAccess(AccessDataFX accessDataFX) {
+            AccessDataDao accessDataDao = new AccessDataDao();
+            accessDataDao.updateById(accessDataFX.getId(), accessDataFX.getObject(), accessDataFX.getLogin(), accessDataFX.getPassword(), accessDataFX.getNote());
+            init();
+    }
+
+    public void deleteAccess(AccessDataFX accessDataFX){
+        AccessDataDao accessDataDao = new AccessDataDao();
+        accessDataDao.deleteById(accessDataFX.getId());
         init();
     }
 
@@ -56,4 +68,6 @@ public class AccessDataModel {
     public void setAccessDataFXProperty(AccessDataFX accessDataFXProperty) {
         this.accessDataFXProperty.set(accessDataFXProperty);
     }
+
+
 }

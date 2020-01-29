@@ -1,11 +1,10 @@
 package org.example.database.models;
 
 import javax.persistence.*;
-import java.util.stream.BaseStream;
 
 @Entity
-        @Table(name = "NEO1012_DaneDostepoweBackUp")
-public class AccessData implements BaseModel {
+        @Table(name = "NEO1012_DaneDostepowe_v2")
+public class AccessData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dd_id")
@@ -30,12 +29,12 @@ public class AccessData implements BaseModel {
     public AccessData(){
 
     }
-//    public AccessData(String txtObjectText, String txtLoginText, String txtPasswordText, String txtNote){
-//        this.login = txtLoginText;
-//        this.password = txtPasswordText;
-//        this.note = txtNote;
-//        this.object = txtObjectText;
-//    }
+    public AccessData(String txtObjectText, String txtLoginText, String txtPasswordText, String txtNote){
+        this.login = txtLoginText;
+        this.password = txtPasswordText;
+        this.note = txtNote;
+        this.object = txtObjectText;
+    }
 
     public int getId() {
         return id;

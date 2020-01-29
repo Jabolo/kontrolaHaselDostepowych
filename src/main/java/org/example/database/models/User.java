@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "NEO1012_Uzytkownicy")
-public class User implements BaseModel{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uz_id")
@@ -86,8 +86,6 @@ public class User implements BaseModel{
         this.uz_Password = uz_Haslo;
         this.uz_Name = uz_Name;
         this.uz_Surname = uz_Nazwisko;
-        this.uz_Status = true;
-        this.uz_IV = "tH9l5JRIPRI1fGH4vKxSOlgIDT4x7UiJ";
     }
 
     @Override
