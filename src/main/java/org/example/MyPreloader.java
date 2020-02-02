@@ -15,26 +15,21 @@ public class MyPreloader extends Preloader {
 
     private Stage preloaderStage;
     private Scene scene;
-
     private Label progress;
 
     public MyPreloader() {
         super();
-        System.out.println("constructor Preloader");
     }
 
     @Override
     public void init() throws Exception {
         super.init();
-        System.out.println("init preloader");
         Platform.runLater(() ->{
-            Label title = new Label("Showing preloader stage!\nLoading, please wait...");
+            Label title = new Label("Loading, please wait...");
             title.setTextAlignment(TextAlignment.CENTER);
-            progress = new Label("0%");
-
+            progress = new Label("");
             VBox root = new VBox(title, progress);
             root.setAlignment(Pos.CENTER);
-
             scene = new Scene(root, WIDTH, HEIGHT);
         });
     }
@@ -53,16 +48,12 @@ public class MyPreloader extends Preloader {
         switch (type) {
             case BEFORE_LOAD:
                 // Called after MyPreloader#start is called.
-                System.out.println(App.STEP() + "BEFORE_LOAD");
                 break;
             case BEFORE_INIT:
                 // Called before MyApplication#init is called.
-                System.out.println(App.STEP() + "BEFORE_INIT");
                 break;
             case BEFORE_START:
                 // Called after MyApplication#init and before MyApplication#start is called.
-                System.out.println(App.STEP() + "BEFORE_START");
-
                 preloaderStage.hide();
                 break;
         }
@@ -72,7 +63,7 @@ public class MyPreloader extends Preloader {
     public void handleApplicationNotification(PreloaderNotification info) {
         super.handleApplicationNotification(info);
         if (info instanceof ProgressNotification) {
-            progress.setText(((ProgressNotification) info).getProgress() + "%");
+            //progress.setText(((ProgressNotification) info).getProgress() + "%");
         }
     }
 }

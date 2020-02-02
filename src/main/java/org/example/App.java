@@ -22,12 +22,12 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    private static final int COUNT_LIMIT = 50000;
-
-    private static int stepCount = 1;
-    public static String STEP() {
-        return stepCount++ + ". ";
-    }
+//    private static final int COUNT_LIMIT = 50000;
+//
+//    private static int stepCount = 1;
+//    public static String STEP() {
+//        return stepCount++ + ". ";
+//    }
 
     @Override
     public void init() throws Exception {
@@ -54,7 +54,7 @@ public class App extends Application {
         Pane borderPane = toolFxml.fxmlLoader("fxml/mainPanel.fxml");
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Kom");
+        primaryStage.setTitle("App");
         primaryStage.show();
     }
 
