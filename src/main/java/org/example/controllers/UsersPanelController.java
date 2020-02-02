@@ -1,12 +1,16 @@
 package org.example.controllers;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.example.modelsFx.UserFX;
 import org.example.modelsFx.UserModel;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class UsersPanelController {
 
@@ -44,11 +48,28 @@ public class UsersPanelController {
 
     private UserModel userModel;
 
+    //For MultiThreading
+    private Executor exec;
+
     @FXML
     private void initialize() {
-        this.userModel = new UserModel();
-        this.userModel.init();
-        binding();
+        exec = Executors.newCachedThreadPool((runnable) -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t;
+        });
+        Task task = new Task() {
+            @Override
+            protected Object call() {
+                userModel = new UserModel();
+                userModel.init();
+                binding();
+                return null;
+            }
+        };
+        task.setOnFailed(e-> task.getException().printStackTrace());
+        task.setOnSucceeded(e-> System.out.println("Initialized UserFXML"));
+        exec.execute(task);
     }
 
     private void binding() {
@@ -77,11 +98,18 @@ public class UsersPanelController {
             protected void updateItem(UserFX userFX, boolean empty) {
                 super.updateItem(userFX, empty);
                 //tutaj buduje komorke
-
                 if (!empty) {
                     setGraphic(button);
                     button.setOnAction(event -> {
-                        userModel.deleteUser(userFX);
+                        Task task = new Task() {
+                            @Override
+                            protected Object call() {
+                                userModel.deleteUser(userFX);
+                                return null;
+                            }
+                        };
+                        exec.execute(task);
+                        task.setOnSucceeded(e -> System.out.println("Deleted User"));
                     });
                 }
                 else{
@@ -101,7 +129,15 @@ public class UsersPanelController {
                 if(!empty){
                     setGraphic(button);
                     button.setOnAction(event -> {
-                        userModel.updateUser(userFX);
+                        Task task = new Task() {
+                            @Override
+                            protected Object call() {
+                                userModel.updateUser(userFX);
+                                return null;
+                            }
+                        };
+                        exec.execute(task);
+                        task.setOnSucceeded(e -> System.out.println("Deleted User"));
                     });
                 }
                 else {
@@ -145,11 +181,16 @@ public class UsersPanelController {
     }
 
     public void addUserAction(ActionEvent actionEvent) {
-        try {
-            this.userModel.saveUserInDataBase();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            Task task = new Task() {
+                @Override
+                protected Object call() {
+                    userModel.saveUserInDataBase();
+                    return null;
+                }
+            };
+            exec.execute(task);
+            task.setOnSucceeded(e -> System.out.println("Added User"));
+
         this.txtName.clear();
         this.txtSurname.clear();
         this.txtLogin.clear();

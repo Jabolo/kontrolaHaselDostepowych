@@ -6,7 +6,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class AccessDataDao {
+public class AccessDataDao extends Exception {
 
     public void createAccess(AccessData ad){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -26,8 +26,7 @@ public class AccessDataDao {
     public List<AccessData> querryForAll(){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
-            List<AccessData> accessData = session.createQuery("from AccessData ", AccessData.class).list();
-            return accessData;
+            return session.createQuery("from AccessData ", AccessData.class).list();
         } catch (Exception e) {
             e.printStackTrace();
         }

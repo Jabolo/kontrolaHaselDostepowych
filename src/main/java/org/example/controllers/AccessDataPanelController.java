@@ -1,12 +1,16 @@
 package org.example.controllers;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.example.modelsFx.AccessDataFX;
 import org.example.modelsFx.AccessDataModel;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class AccessDataPanelController {
 
@@ -38,11 +42,28 @@ public class AccessDataPanelController {
 
     private AccessDataModel accessDataModel;
 
+    private Executor exec;
+
     @FXML
     private void initialize() {
-        this.accessDataModel = new AccessDataModel();
-        this.accessDataModel.init();
-        binding();
+        exec = Executors.newCachedThreadPool((runnable) -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t;
+        });
+
+        Task task = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                accessDataModel = new AccessDataModel();
+                accessDataModel.init();
+                binding();
+                return null;
+            }
+        };
+        task.setOnFailed(e-> task.getException().printStackTrace());
+        task.setOnSucceeded(e-> System.out.println("Initialized AccessDataFXML"));
+        exec.execute(task);
     }
 
     private void binding() {
@@ -75,7 +96,16 @@ public class AccessDataPanelController {
                 if (!empty) {
                     setGraphic(button);
                     button.setOnAction(event -> {
-                        accessDataModel.deleteAccess(accessDataFX);
+                        Task task = new Task() {
+                            @Override
+                            protected Object call() throws Exception {
+                                accessDataModel.deleteAccess(accessDataFX);
+                                return null;
+                            }
+                        };
+                        task.setOnFailed(e-> task.getException().printStackTrace());
+                        task.setOnSucceeded(e-> System.out.println("Deleted AccessData"));
+                        exec.execute(task);
                     });
                 }
                 else{
@@ -95,7 +125,17 @@ public class AccessDataPanelController {
                 if(!empty){
                     setGraphic(button);
                     button.setOnAction(event -> {
-                        accessDataModel.updateAccess(accessDataFX);
+                        Task task = new Task() {
+                            @Override
+                            protected Object call() throws Exception {
+                                accessDataModel.updateAccess(accessDataFX);
+                                return null;
+                            }
+                        };
+                        task.setOnFailed(e-> task.getException().printStackTrace());
+                        task.setOnSucceeded(e-> System.out.println("Updated AccessData"));
+                        exec.execute(task);
+
                     });
                 }
             }
@@ -127,17 +167,20 @@ public class AccessDataPanelController {
     }
 
     public void btnAddAccessDataAction(ActionEvent actionEvent) {
-        try {
-            this.accessDataModel.saveAccessDataInDB();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        finally {
+        Task task = new Task() {
+            @Override
+            protected Object call() {
+                accessDataModel.saveAccessDataInDB();
+                return null;
+            }
+        };
+        task.setOnFailed(e-> task.getException().printStackTrace());
+        task.setOnSucceeded(e-> System.out.println("Added AccessData"));
+        exec.execute(task);
             this.txtLogin.clear();
             this.txtNote.clear();
             this.txtPassword.clear();
             this.txtObject.clear();
-        }
     }
 
     public void bindButton() {
@@ -145,5 +188,4 @@ public class AccessDataPanelController {
                 .bind(txtObject.textProperty().isEmpty().or(txtLogin.textProperty().isEmpty())
                 .or(txtNote.textProperty().isEmpty()).or(txtPassword.textProperty().isEmpty()));
     }
-
 }
